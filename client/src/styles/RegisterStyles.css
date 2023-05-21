@@ -1,0 +1,16 @@
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+}
+.card{
+    border: 1px solid black;
+    padding: 40px;
+}
+.register-form{
+    border-radius: 1px solid grey;
+    padding: 30px;
+    width: 30%;
+}
