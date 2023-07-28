@@ -1,7 +1,7 @@
 .main{
     padding: 10px;
     height: 100vh;
-    display: flex;
+    /* display: flex; */
 }
 .layout{
     display: flex;

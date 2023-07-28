@@ -11,7 +11,7 @@ export const UserMenu = [
   },
   {
     name: "Apply Doctor",
-    path: "/appy-doctor",
+    path: "/apply-doctor",
     icon: "fa-solid fa-user-doctor",
   },
   {

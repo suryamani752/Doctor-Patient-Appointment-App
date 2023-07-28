@@ -3,12 +3,13 @@ import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../redux/features/alertSlice";
 import axios from "axios";
-import { setuser } from "../redux/features/userSlice";
+import { setUser } from "../redux/features/userSlice";
 
 export default function ProtectedRoutes({ children }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
+  // eslint-disable-next-line
   const getUser = async () => {
     try {
       dispatch(showLoading());
@@ -23,7 +24,7 @@ export default function ProtectedRoutes({ children }) {
       );
       dispatch(hideLoading());
       if (res.data.success) {
-        dispatch(setuser(res.data.data));
+        dispatch(setUser(res.data.data));
       } else {
         <Navigate to="/login" />;
         localStorage.clear();
