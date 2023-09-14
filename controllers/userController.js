@@ -110,11 +110,11 @@ const ApplyDoctorController = async (req, res) => {
         onClickPath: "/admin/doctors",
       },
     });
-    await userModel.findByIdAndUpdate(adminUser._id, {notification})
+    await userModel.findByIdAndUpdate(adminUser._id, { notification });
     res.status(201).send({
       success: true,
-      message: "doctor account applied successfully"
-    })
+      message: "doctor account applied successfully",
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -125,9 +125,58 @@ const ApplyDoctorController = async (req, res) => {
   }
 };
 
+//notification
+const getAllNotificationController = async (req, res) => {
+  try {
+    const user = await userModel.findOne({ _id: req.body.userId });
+    const seennotification = user.seennotification;
+    const notification = user.notification;
+    seennotification.push(...notification);
+    user.notification = [];
+    user.seennotification = notification;
+    const updatedUser = await user.save();
+    return res.status(200).send({
+      success: true,
+      message: "all notification marked as read",
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "Error in notification",
+      success: false,
+      error,
+    });
+  }
+};
+
+const DeleteAllNotificationController = async () => {
+  try {
+    const user = await userModel.findOne({ _id: req.body.userId });
+    user.notification = [];
+    user.seennotification = [];
+    const updatedUser = await user.save();
+    updatedUser.password = undefined;
+    res.status(200).send({
+      success: true,
+      message: "notification deleted successfully",
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in delete",
+      error,
+    });
+  }
+};
+
 module.exports = {
   loginController,
   registerController,
   authContoller,
   ApplyDoctorController,
+  getAllNotificationController,
+  DeleteAllNotificationController,
 };
