@@ -14,7 +14,7 @@ const ApplyDoctor = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "/api/v1/user/apply-doctor",
+        "https://doctor-appointment-app-pne5.onrender.com/api/v1/user/apply-doctor",
         { ...values, userId: user._id },
         {
           headers: {

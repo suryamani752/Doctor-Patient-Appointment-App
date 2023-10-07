@@ -15,7 +15,10 @@ const Login = () => {
 
     try {
       dispatch(showLoading());
-      const res = await axios.post("/api/v1/user/login", values);
+      const res = await axios.post(
+        "https://doctor-appointment-app-pne5.onrender.com/api/v1/user/login",
+        values
+      );
       window.location.reload();
       dispatch(hideLoading());
       if (res.data.success) {
