@@ -16,7 +16,7 @@ const Register = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "https://doctor-appointment-app-pne5.onrender.com/api/v1/user/register",
+        "/api/v1/user/register",
         values
       );
       dispatch(hideLoading());

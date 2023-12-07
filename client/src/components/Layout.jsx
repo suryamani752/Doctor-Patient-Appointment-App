@@ -17,8 +17,30 @@ const Layout = ({ children }) => {
     navigate("/login");
   };
 
+  const doctorMenu = [
+    {
+      name: "Home",
+      path: "/",
+      icon: "fa-solid fa-house",
+    },
+    {
+      name: "Appointment",
+      path: "/appointment",
+      icon: "fa-solid fa-list",
+    },
+    {
+      name: "Profile",
+      path: `/doctor/profile/${user?._id}`,
+      icon: "fa-solid fa-user",
+    },
+  ];
+
   //rendering menu list
-  const SidebarMenu = user?.isAdmin ? AdminMenu : UserMenu;
+  const SidebarMenu = user?.isAdmin
+    ? AdminMenu
+    : user?.isDoctor
+    ? doctorMenu
+    : UserMenu;
   return (
     <>
       <div className="main">

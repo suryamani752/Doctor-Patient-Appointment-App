@@ -1,15 +1,14 @@
-const express = require('express');
-const colors = require('colors');
-const morgan = require('morgan');
-const dotenv = require('dotenv');
-const connectDB = require('./config/db');
-
+const express = require("express");
+const colors = require("colors");
+const morgan = require("morgan");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
 
 //dotenv config
 dotenv.config();
 
 //mongoDB connection
-connectDB()
+connectDB();
 
 // rest object
 const app = express();
@@ -25,12 +24,17 @@ app.use(morgan("dev"));
 //     });
 // });
 
-app.use('/api/v1/user', require('./routes/userRoutes'))
+app.use("/api/v1/user", require("./routes/userRoutes"));
+app.use("/api/v1/admin", require("./routes/adminRoutes"));
+app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
 
 // port
 const port = process.env.PORT || 7520;
 
 //listen
 app.listen(port, () => {
-    console.log(`server Running in ${process.env.NODE_MODE} Mode on port ${process.env.PORT}`.bgCyan.white);
+  console.log(
+    `server Running in ${process.env.NODE_MODE} Mode on port ${process.env.PORT}`
+      .bgCyan.white
+  );
 });

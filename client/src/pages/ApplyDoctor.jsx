@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoading, showLoading } from "../redux/features/alertSlice";
 import axios from "axios";
+import moment from "moment";
 
 const ApplyDoctor = () => {
   const { user } = useSelector((state) => state.user);
@@ -14,8 +15,15 @@ const ApplyDoctor = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "https://doctor-appointment-app-pne5.onrender.com/api/v1/user/apply-doctor",
-        { ...values, userId: user._id },
+        "/api/v1/user/apply-doctor",
+        {
+          ...values,
+          userId: user._id,
+          timing: [
+            moment(values.timing[0]).format("HH:mm"),
+            moment(values.timing[1]).format("HH:mm"),
+          ],
+        },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
